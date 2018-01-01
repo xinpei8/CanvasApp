@@ -1,0 +1,35 @@
+<project>
+
+ <!-- ================================= 
+          target: clean              
+      ================================= -->
+    <target name="clean" description="Delete all generated content.">
+        <delete dir="build"/>
+    </target>
+
+ <!-- ================================= 
+          target: compile           
+      ================================= -->
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+ <!-- ================================= 
+          target: jar            
+      ================================= -->
+    <target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/CanvasApp.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="edu.nyu.cs.pqs.canvas.CanvasApp"/>
+            </manifest>
+        </jar>
+    </target>
+ <!-- ================================= 
+          target: run            
+      ================================= -->
+    <target name="run" depends="compile, jar" description="--> Runs Canvas App">
+        <java jar="build/jar/CanvasApp.jar" fork="true"/>
+    </target>
+
+</project>
